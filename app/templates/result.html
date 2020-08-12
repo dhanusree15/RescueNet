@@ -1,13 +1,15 @@
-{% extends "master.html" %}
-{% block title %}Results{% endblock %}
+{% extends "index.html" %}
+{% block title %}Result{% endblock %}
 
 {% block message %}
+    <!-- Display input message below form-->
     <hr />
     <h4 class="text-center mt-5">MESSAGE</h4>
     <p class="text-center"><i>{{query}}</i></p>
 {% endblock %}
 
 {% block content %}
+    <!-- Result section -->
     <h1 class="text-center">Result</h1>
     <ul class="list-group">
         {% for category, classification in classification_result.items() %}
