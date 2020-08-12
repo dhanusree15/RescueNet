@@ -1,8 +1,0 @@
-jupyterlab
-joblib
-pandas
-SQLAlchemy
-plotly
-nltk
-scikit-learn
-Flask
