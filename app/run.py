@@ -1,43 +1,45 @@
-import re
 import joblib
 import json
-import plotly
+import re
 import pandas as pd
-from sklearn.feature_extraction.text import TfidfVectorizer
+from sqlalchemy import create_engine
+
+import plotly
+from plotly.graph_objs import Bar, Histogram
 
 import nltk
 nltk.download('stopwords')
-
+nltk.download('punkt')
 from nltk.corpus import stopwords
-from nltk.stem.snowball import SnowballStemmer
-# from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import word_tokenize
+from nltk.stem.snowball import SnowballStemmer
+from sklearn.feature_extraction.text import TfidfVectorizer
 
 from flask import Flask
-from flask import render_template, request, jsonify
-from plotly.graph_objs import Bar, Histogram
-from sqlalchemy import create_engine
+from flask import request, jsonify, render_template
 
 
+# Create app
 app = Flask(__name__)
 
 
+# List of stopwords
 stop = stopwords.words('english')
 
 
-# def tokenize(text):
-#     tokens = word_tokenize(text)
-#     lemmatizer = WordNetLemmatizer()
-
-#     clean_tokens = []
-#     for tok in tokens:
-#         clean_tok = lemmatizer.lemmatize(tok).lower().strip()
-#         clean_tokens.append(clean_tok)
-
-#     return clean_tokens
-
-
 def get_top_words(txt, num_words=10):
+
+    '''
+    Find words with the highest document frequency.
+
+    Args:
+        txt (list-like object): text data
+        num_words (int): number of words to find
+
+    Returns:
+        (Pandas series) top words and their document frequencies
+    '''
+
     tfidf = TfidfVectorizer(stop_words=stop, max_features=num_words)
     tfidf.fit(txt)
     words = tfidf.vocabulary_
@@ -48,14 +50,23 @@ def get_top_words(txt, num_words=10):
 
 
 def tokenize(text):
+
     '''
+    Tokenize a string into word stems and remove stopwords.
+
     Steps:
-        Lowercase characters
-        Remove punctuation
-        Tokenize
-        Strip white spaces
-        Remove stopwords
-        Stem words
+        1. Lowercase characters
+        2. Remove punctuation
+        3. Tokenize
+        4. Strip white spaces
+        5. Remove stopwords
+        6. Stem words
+
+    Args:
+        text (str): Text to tokenize
+
+    Returns:
+        (list) stemmed non-stopword tokens
     '''
     
     # Steps 1 - 3
@@ -70,7 +81,7 @@ def tokenize(text):
 
 
 # Load data
-engine = create_engine('sqlite:///../data/DisasterResponse.db')
+engine = create_engine('sqlite:///../data/messages.db')
 df = pd.read_sql_table('messages', engine)
 
 
@@ -80,12 +91,13 @@ model = joblib.load("../models/classifier.pkl")
 
 # Home page
 @app.route('/')
+@app.route('/home')
 @app.route('/index')
 def index():
     
     # Genre counts
     genre_counts = df.groupby('genre').count()['message']
-    genre_names = list(genre_counts.index)
+    genre_names = genre_counts.index.tolist()
     
     # Message word counts
     word_counts = df.message.apply(lambda s: len(s.split()))
@@ -95,7 +107,7 @@ def index():
     cat_counts = df.iloc[:, 4:].sum().sort_values()[-10:]
     cat_names = cat_counts.index.tolist()
     
-    # Top word counts
+    # Top words
     top_counts = get_top_words(df.message)
     top_words = top_counts.index.tolist()
     
@@ -148,7 +160,7 @@ def index():
             }
         },
         
-        # Top word counts
+        # Top words
         {
             'data': [
                 Bar(
@@ -158,7 +170,7 @@ def index():
                 )
             ],
             'layout': {
-                'title': 'Most Common Words Found in Messages',
+                'title': 'Most Common Words in Messages',
                 'yaxis': {'title': "Word"},
                 'xaxis': {'title': "Number of Messages"},
                 'margin': {'l': 100}
@@ -167,30 +179,30 @@ def index():
     ]
     
     # Encode visuals in JSON
-    ids = ["graph-{}".format(i) for i, _ in enumerate(graphs)]
+    ids = [f'graph-{i}' for i, _ in enumerate(graphs)]
     graphJSON = json.dumps(graphs, cls=plotly.utils.PlotlyJSONEncoder)
     
     # Render home page
-    return render_template('master.html', ids=ids, graphJSON=graphJSON)
+    return render_template('index.html', ids=ids, graphJSON=graphJSON)
 
 
 # Classification results page
-@app.route('/go')
-def go():
+@app.route('/result')
+def result():
     
     # Save user input
-    query = request.args.get('query', '') 
+    query = request.args.get('query', '')
 
     # Classify message
     classification_labels = model.predict([query])[0]
-    classification_results = dict(zip(df.columns[4:], classification_labels))
+    classification_result = dict(zip(df.columns[4:], classification_labels))
 
-    # Render the results page
-    return render_template('go.html', query=query, classification_result=classification_results)
+    # Render result page
+    return render_template('result.html', query=query, classification_result=classification_result)
 
 
 def main():
-    app.run(host='0.0.0.0', port=3001, debug=True)
+    app.run(host='0.0.0.0', port=3001, debug=False)
 
 
 if __name__ == '__main__':
