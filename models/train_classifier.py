@@ -123,13 +123,14 @@ def evaluate_model(model, X_test, Y_test, category_names):
     for col in category_names:
         report = classification_report(Y_test[col], pred[col])
         scores = report.split('accuracy')[1].split()
-        metrics.append([scores[i] for i in [0, 4, 5, 6, 10, 11, 12]])
+        metrics.append([float(scores[i]) for i in [0, 4, 5, 6, 10, 11, 12]])
 
     metric_names = ['accuracy', 'macro_avg_precision', 'macro_avg_recall', 'macro_avg_f1', 'weighted_avg_precision',
                     'weighted_avg_recall', 'weighted_avg_f1']
     metrics_df = pd.DataFrame(metrics, columns=metric_names, index=category_names)
 
     print(metrics_df)
+    print(metrics_df.sum)
     return metrics_df
         
 
