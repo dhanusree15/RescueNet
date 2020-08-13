@@ -53,10 +53,10 @@ None of the messages in the dataset were labeled as `child_alone` so this catego
 
 To classify these 35 categories, this application uses a machine learning pipeline with the following steps:
 
-1. Tf-idf vectorizer - tokenizes text data and converts it into a numeric vector that can be used in machine learning classifiers
+1. Tf-idf vectorizer - tokenizes an entire corpus of text data to build a vocabulary and converts individual documents into a numeric vector based on the vocabulary
 
-	- Tokenizer steps: lowercase all character > remove all punctuation > tokenize text into individual words > strip any white space surrounding words > remove stopwords > stem remaining words
-	- Vectorizer steps: convert message into a term frequency vector (token counts) > normalize counts by multiplying the inverse document frequency 
+	- Tokenizer steps: lowercase all characters > remove all punctuation > tokenize text into individual words > strip any white space surrounding words > remove stopwords > stem remaining words
+	- Vectorizer steps: convert a text document into a term frequency vector (word counts) > normalize word counts by multiplying the inverse document frequency
 
 2. Multi-output classifier using a logistic regression model - predicts 35 binary labels (0 or 1 for each of the 35 categories) 
 
