@@ -19,8 +19,12 @@ The application uses a classifier that was trained on the data described below.
 #### Data
 =======
 ## Data
+<<<<<<< HEAD
 
 The [data](https://appen.com/datasets/combined-disaster-response-data/) contains 26,248 labeled messages that were sent during past disasters around the world, such as a 2010 earthquake in Haiti and a 2012 super-storm (Sandy) in the U.S.
+=======
+The [data](https://appen.com/datasets/combined-disaster-response-data/) contains 26,248 labeled messages that were sent during past disasters around the world, such as a 2010 earthquake in Haiti and a 2012 super-storm (Sandy) in the U.S..
+>>>>>>> 39e50a23 (Edit readme)
 Each message is labeled as 1 or more of the following 36 categories: <br />
 
 <pre>
@@ -46,8 +50,11 @@ None of the messages in the dataset were labeled as `child_alone` so this catego
 
 To classify these 35 categories, this application uses a machine learning pipeline with the following steps:
 
-1. Tf-idf vectorizer - converts text data into a numeric vector that can be used in a machine learning classifier
-	- Vectorizer steps: lowercase all character > remove all punctuation > tokenize text into individual words > strip any white space surrounding words > remove stopwords > stem remaining words
+1. Tf-idf vectorizer - tokenizes text data and converts it into a numeric vector that can be used in machine learning classifiers
+
+	- Tokenizer steps: lowercase all character > remove all punctuation > tokenize text into individual words > strip any white space surrounding words > remove stopwords > stem remaining words
+	- Vectorizer steps: convert message into a term frequency vector (token counts) > normalize counts by multiplying the inverse document frequency 
+
 2. Multi-output classifier using a logistic regression model - predicts 35 binary labels (0 or 1 for each of the 35 categories) 
 
 #### Results
