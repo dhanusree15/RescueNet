@@ -13,6 +13,7 @@ defusedxml==0.6.0
 entrypoints==0.3
 Flask==1.1.2
 idna==2.10
+importlib-metadata==1.7.0
 ipykernel==5.3.4
 ipython==7.17.0
 ipython-genutils==0.2.0
@@ -33,7 +34,7 @@ mistune==0.8.4
 nbconvert==5.6.1
 nbformat==5.0.7
 nltk==3.5
-notebook==6.1.1
+notebook==6.1.2
 numpy==1.19.1
 packaging==20.4
 pandas==1.1.0
@@ -72,3 +73,4 @@ urllib3==1.25.10
 wcwidth==0.2.5
 webencodings==0.5.1
 Werkzeug==1.0.1
+zipp==3.1.0

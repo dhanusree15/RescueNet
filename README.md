@@ -3,22 +3,30 @@ Disaster response organizations receive millions of messages following a disaste
 This web application was built to classify disaster messages so that an emergency professional would know which organization to send the message to.
 The application uses a classifier that was trained on the data described below.
 
-#### Data
+## Data
 The [data](https://appen.com/datasets/combined-disaster-response-data/) contains 26,248 labeled messages that were sent during past disasters around the world, such as a 2010 earthquake in Haiti and a 2012 super-storm (Sandy) in the U.S.
 Each message is labeled as 1 or more of the following 36 categories: <br />
 
 <pre>
-'related', 'request', 'offer', 'aid_related', 'medical_help', 'medical_products', 
-'search_and_rescue', 'security', 'military', 'child_alone', 'water', 'food', 
-'shelter', 'clothing', 'money', 'missing_people', 'refugees', 'death', 
-'other_aid', 'infrastructure_related', 'transport', 'buildings', 'electricity', 'tools', 
-'hospitals', 'shops', 'aid_centers', 'other_infrastructure', 'weather_related', 'floods', 
-'storm', 'fire', 'earthquake', 'cold', 'other_weather', 'direct_report'
+'related', 'request', 'offer', 'aid_related', 
+'medical_help', 'medical_products',
+'search_and_rescue', 'security', 'military', 
+'child_alone', 'water', 'food', 'shelter', 
+'clothing', 'money', 'missing_people', 'refugees', 
+'death', 'other_aid', 'infrastructure_related', 
+'transport', 'buildings', 'electricity', 'tools', 
+'hospitals', 'shops', 'aid_centers', 
+'other_infrastructure', 'weather_related', 
+'floods', 'storm', 'fire', 'earthquake', 'cold', 
+'other_weather', 'direct_report'
 </pre>
 
 None of the messages in the dataset were labeled as `child_alone` so this category was removed altogether before building the classifier, leaving 35 categories to classify.
 
-#### Classifier
+
+## Classifier
+
+#### Pipeline
 
 To classify these 35 categories, this application uses a machine learning pipeline with the following steps:
 
@@ -75,7 +83,7 @@ Random forest metrics:
 6. Run the following command to run the web app:
     `python run.py`
 
-7. Navigate to http://0.0.0.0:3001/ in the browser
+7. Navigate to http://127.0.0.1:3001/ in the browser
 
 #### Files
 
