@@ -114,12 +114,12 @@ Random forest metrics:
 
 - `pip_env.txt` - list of pip-installed packages after pip-installing the `requirements.txt` file
 
-#### Interface
+#### Interface - Home Page
 
-<strong>Home page</strong> 
 ![home page](images/home.png)
-<br />
-<strong>Result page</strong>
+
+#### Interface - Result Page
+
 ![result page](images/result.png)
 
 
