@@ -3,6 +3,7 @@ Disaster response organizations receive millions of messages following a disaste
 This web application was built to classify disaster messages so that an emergency professional would know which organization to send the message to.
 The application uses a classifier that was trained on the data described below.
 
+
 ## Data
 The [data](https://appen.com/datasets/combined-disaster-response-data/) contains 26,248 labeled messages that were sent during past disasters around the world, such as a 2010 earthquake in Haiti and a 2012 super-storm (Sandy) in the U.S..
 Each message is labeled as 1 or more of the following 36 categories: <br />
@@ -112,6 +113,12 @@ Random forest metrics:
 - `requirements.txt` - list of required Python packages
 
 - `pip_env.txt` - list of pip-installed packages after pip-installing the `requirements.txt` file
+
+#### Interface
+
+![home page](images/home.png)
+
+![result page](images/result.png)
 
 
 ## License
