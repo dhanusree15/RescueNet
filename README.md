@@ -143,11 +143,15 @@ Random forest metrics:
 
 #### Interface
 
+<strong>Home page</strong> 
 ![home page](images/home.png)
-
+<br />
+<strong>Result page</strong>
 ![result page](images/result.png)
 
 
 ## License
 This repository is licensed under a [Creative Commons Attribution License](https://creativecommons.org/licenses/by/4.0/).
+
+
 
