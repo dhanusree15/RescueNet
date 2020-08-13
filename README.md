@@ -116,8 +116,10 @@ Random forest metrics:
 
 #### Interface
 
+<strong>Home page</strong> 
 ![home page](images/home.png)
-
+<br />
+<strong>Result page</strong>
 ![result page](images/result.png)
 
 
