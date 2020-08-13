@@ -11,6 +11,7 @@ The application uses a classifier that was trained on the data described below.
 
 
 
+
 ### Instructions:
 1. Navigate to the project's root directory in the terminal
 =======
@@ -18,13 +19,15 @@ The application uses a classifier that was trained on the data described below.
 
 #### Data
 =======
+=======
+
 ## Data
-<<<<<<< HEAD
+
 
 The [data](https://appen.com/datasets/combined-disaster-response-data/) contains 26,248 labeled messages that were sent during past disasters around the world, such as a 2010 earthquake in Haiti and a 2012 super-storm (Sandy) in the U.S.
 =======
 The [data](https://appen.com/datasets/combined-disaster-response-data/) contains 26,248 labeled messages that were sent during past disasters around the world, such as a 2010 earthquake in Haiti and a 2012 super-storm (Sandy) in the U.S..
->>>>>>> 39e50a23 (Edit readme)
+
 Each message is labeled as 1 or more of the following 36 categories: <br />
 
 <pre>
@@ -137,6 +140,12 @@ Random forest metrics:
 - `requirements.txt` - list of required Python packages
 
 - `pip_env.txt` - list of pip-installed packages after pip-installing the `requirements.txt` file
+
+#### Interface
+
+![home page](images/home.png)
+
+![result page](images/result.png)
 
 
 ## License
