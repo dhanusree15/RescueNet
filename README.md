@@ -7,7 +7,8 @@
 # Disaster Response
 Disaster response organizations receive millions of messages following a disaster and because different organizations take care of different parts of the problem, there needs to be a way of directing messages to the appropriate organization so that they can respond to the problem accordingly. 
 This web application was built to classify disaster messages so that an emergency professional would know which organization to send the message to.
-The application uses a classifier that was trained on the data described below.
+The application uses a classifier that was trained on the data described below. 
+See my [article](https://medium.com/@buitri/building-a-text-classifier-for-disaster-response-caf83137e08d) for a walkthrough of the project.
 
 
 
@@ -121,7 +122,7 @@ Random forest metrics:
 - `app/`
     - `run.py` - This script runs the Flask web application and renders the web pages in the `templates/` directory
     - `templates/`
-        - `index.html` - Home page of the website, which contains (1) an input field to enter a message to classify and (2) a dashboard that summarizes the data that the classifier was trained on
+        - `index.html` - Home page of the website, which contains (1) an input field to enter a message to classify and (2) a data dashboard that summarizes the data that the classifier was trained on
         - `result.html` - Result page of the website, which displays the 35 classification results of the message that was entered into the input field
         
 - `data/`
