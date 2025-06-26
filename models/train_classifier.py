@@ -6,7 +6,7 @@ from sqlalchemy import create_engine
 
 import nltk
 nltk.download('stopwords')
-nltk.download('punkt')
+nltk.download('punkt_tab')
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from nltk.stem.snowball import SnowballStemmer
@@ -45,7 +45,7 @@ def load_data(database_filepath):
     categories = Y.columns.tolist()
     return X, Y, categories
 
-    
+
 def tokenize(text):
 
     '''
@@ -65,16 +65,18 @@ def tokenize(text):
     Returns:
         (list) stemmed non-stopword tokens
     '''
-    
-    # Steps 1 - 3
-    tokens = word_tokenize(re.sub(r'[^A-Za-z0-9]', ' ', text.lower()))
-    
-    # Step 4 - 5
-    stopwords_removed = [word.strip() for word in tokens if word.strip() not in stop]
-    
-    # Step 6
+
+    # Normalize and tokenize text
+    text = re.sub(r'[^a-zA-Z0-9]', ' ', text.lower())  # Clean text
+    tokens = word_tokenize(text)  # Tokenize safely (uses punkt)
+
+    # Remove stopwords and stem
     stemmer = SnowballStemmer('english')
-    return [stemmer.stem(word) for word in stopwords_removed]
+    clean_tokens = [
+        stemmer.stem(tok.strip()) for tok in tokens if tok.strip() not in stop
+    ]
+
+    return clean_tokens
 
 
 def build_model():
@@ -121,7 +123,7 @@ def evaluate_model(model, X_test, Y_test, category_names):
     metrics = []
 
     for col in category_names:
-        report = classification_report(Y_test[col], pred[col])
+        report = classification_report(Y_test[col], pred[col], zero_division=0)
         scores = report.split('accuracy')[1].split()
         metrics.append([float(scores[i]) for i in [0, 4, 5, 6, 10, 11, 12]])
 
@@ -130,7 +132,7 @@ def evaluate_model(model, X_test, Y_test, category_names):
     metrics_df = pd.DataFrame(metrics, columns=metric_names, index=category_names)
 
     print(metrics_df)
-    print(metrics_df.sum)
+    print(metrics_df.sum())
     return metrics_df
         
 

@@ -86,7 +86,7 @@ df = pd.read_sql_table('messages', engine)
 
 
 # Load model
-model = joblib.load("../models/classifier.pkl")
+model = joblib.load("D:/Placement projects/disaster-response/models/classifier.pkl")
 
 
 # Home page
