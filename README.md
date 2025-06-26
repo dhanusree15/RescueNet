@@ -73,30 +73,6 @@ Evaluation metrics are printed for each category in the terminal during model tr
 
 ---
 
-## 🗂️ Project Structure
-
-RescueNet/
-├── app/
-│ ├── templates/
-│ │ ├── index.html
-│ │ └── result.html
-│ └── run.py # Flask web app
-├── data/
-│ ├── disaster_messages.csv
-│ ├── disaster_categories.csv
-│ └── messages.db # SQLite database
-├── models/
-│ ├── train_classifier.py # ML pipeline training script
-│ └── classifier.pkl # Saved ML model
-├── notebooks/
-│ ├── etl_pipeline.ipynb
-│ ├── ml_pipeline.ipynb
-│ └── dashboard_visuals.ipynb
-
-
-
----
-
 ## 📬 Acknowledgments
 
 - Developed as a solution for emergency message classification under real-world disaster response scenarios.
